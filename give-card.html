@@ -7,7 +7,7 @@
 <dom-module id="give-card">
   <template>
     <paper-autocomplete-chips label="Select Profile to give card to"
-      source='[[profiles]]' selected-items="{{items}}">
+      source='[[profiles]]' selected-items="{{value}}">
     </paper-autocomplete-chips>
   </template>
 </dom-module>
@@ -19,6 +19,17 @@
         type:Array,
         value:["Red", "Blue", "Green", "Yellow"],
       },
+      value:{
+        notify:true,
+      },
     },
+    save: function () {
+      if (this.ref) {
+        this.ref.set({given: {
+          time: new Date(),
+          profile: this.value,
+        }})
+      }
+    }
   })
 </script>
